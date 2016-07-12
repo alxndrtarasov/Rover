@@ -1,5 +1,5 @@
 package rover;
 
 public interface Moveable {
-	void move(int x,int y);
+	public void move(int x,int y);
 }

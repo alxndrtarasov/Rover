@@ -14,7 +14,7 @@ public class Ground {
 				landscape[i][j]=new GroundCell(i,j);
 	}
 	
-	public Ground(){
+	Ground(){
 		this(100,100);
 	}
 	

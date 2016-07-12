@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class LoggingCommand implements RoverCommand {
     private static Logger log = Logger.getLogger(LoggingCommand.class.getName());
-    private RoverCommand command;
+    RoverCommand command;
 
     public LoggingCommand(RoverCommand command) {
         this.command = command;

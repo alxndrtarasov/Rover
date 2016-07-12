@@ -1,0 +1,2 @@
+turn EAST
+move 44 54

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,36 +20,43 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *Parsable file should contain only rows like:
- * move < number from 000000000 to 999999999 > < number from 000000000 to 999999999 >
+ * Parsable file should contain only rows like: 
+ * move <number from 000000000 to 999999999> <number from 000000000 to 999999999>
+ * OR
  * turn < EAST or WEST or NORTH or SOUTH >
+ * OR 
+ * < file path >
+ *
  * @author Alexander
  */
 public class RoverCommandParser {
 
     private Rover rover;
-    private Queue<RoverCommand> commands = new LinkedList<RoverCommand>();
+    protected Queue<RoverCommand> commands = new LinkedList<RoverCommand>();
 
     public RoverCommandParser(Rover rover, String fileName) throws ParseException {
-        if (!isFileCorrect(fileName)) {
-            throw new ParseException("Wrong symbol", 0);
-        }
-        this.rover = rover;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            fulfilTheQueue(reader);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(RoverCommandParser.class.getName()).log(Level.SEVERE, null, ex);
+            if (!isFileCorrect(fileName)) {
+                throw new ParseException("Wrong symbol", 0);
+            }
+            this.rover = rover;
+            fulfilTheQueue(fileName);
+        } catch (StackOverflowError er) {
+            System.out.println("ERROR. Recursive run of files");
         }
-
     }
 
-    private void fulfilTheQueue(BufferedReader fileReader) throws ParseException {
+    private void fulfilTheQueue(String fileName) throws ParseException {
         try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(fileName));
             String currentString = "";
             while ((currentString = fileReader.readLine()) != null) {
                 StringTokenizer token = new StringTokenizer(currentString, " ");
                 switch (token.countTokens()) {
+                    case 1:
+                        ImportCommand importCommand = new ImportCommand(rover, token.nextToken());
+                        commands.add(importCommand);
+                        break;
                     case 2:
                         TurnCommand turnCommand = new TurnCommand(rover, token);
                         commands.add(turnCommand);
@@ -68,16 +76,18 @@ public class RoverCommandParser {
         BufferedReader fileReader = null;
         try {
             fileReader = new BufferedReader(new FileReader(fileName));
-            Pattern p = Pattern.compile("(move [0-9]{1,6} [0-9]{1,6})|(turn (EAST)|(WEST)|(SOUTH)|(NORTH))");
+            Pattern p = Pattern.compile("(move [0-9]{1,6} [0-9]{1,6})|(turn ((EAST)|(WEST)|(SOUTH)|(NORTH)))");
             String currentString = "";
             while ((currentString = fileReader.readLine()) != null) {
                 Matcher m = p.matcher(currentString);
                 if (!m.matches()) {
-                    return false;
+                    if (!isFileCorrect(currentString)) {
+                        return false;
+                    }
                 }
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("File does not exist");
+            System.out.println("File " + fileName + " does not exist");
             return false;
         } catch (Exception ex) {
             Logger.getLogger(RoverCommandParser.class.getName()).log(Level.SEVERE, null, ex);

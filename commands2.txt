@@ -1,0 +1,4 @@
+move 97 96
+turn NORTH
+turn SOUTH
+move 51 63

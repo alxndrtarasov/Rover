@@ -1,0 +1,2 @@
+turn WEST
+commands2.txt

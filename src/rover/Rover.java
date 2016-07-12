@@ -60,10 +60,12 @@ public class Rover implements Moveable, Turnable {
             r.move(9, 9);
             r.getVisor().hasObstacles(9, 9);
             RoverCommandParser parser = new RoverCommandParser(r, "commands.txt");
-            RoverCommand command = parser.readNextCommand();
-            command.execute();
-            RoverCommand command2 = parser.readNextCommand();
-            command2.execute();
+            RoverCommand command = null;
+            while ((command = parser.readNextCommand()) != null) {
+                LoggingCommand logCom = new LoggingCommand(command);
+                logCom.execute();
+            }
+
         } catch (ParseException ex) {
             System.out.println("Unparsable file");
         }

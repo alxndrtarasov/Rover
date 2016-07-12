@@ -1,2 +1,5 @@
 turn EAST
+turn WEST
 move 44 54
+commands2.txt
+commands1.txt

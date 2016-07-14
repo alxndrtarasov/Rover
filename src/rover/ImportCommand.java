@@ -6,23 +6,33 @@
 package rover;
 
 import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  *
  * @author Alexander
  */
-public class ImportCommand extends RoverCommandParser implements RoverCommand {
+abstract class ImportCommand implements RoverCommand{
+    protected RoverCommandParser parser;
+    protected Rover rover;
+    protected Queue commands = new LinkedList<RoverCommand>();
 
-    public ImportCommand(Rover rover, String fileName) throws ParseException {
-        super(rover, fileName);
+    public ImportCommand(Rover rover, String fileName, RoverCommandParser parser) throws ParseException, RecursiveRunException {
+        parser.addFileToRun(fileName);
+        this.rover = rover;
+        this.parser=parser;
+        fulfilTheQueue(fileName);
+        parser.popTheFile();
     }
 
-    //Adds the graphic to the composition.
+    abstract void fulfilTheQueue (String fileName)throws ParseException,RecursiveRunException;
+    //To change body of generated methods, choose Tools | Templates.
+
     public void add(RoverCommand command) {
         commands.add(command);
     }
 
-    //Removes the graphic from the composition.
     public void remove(RoverCommand command) {
         commands.remove(command);
     }
@@ -30,7 +40,7 @@ public class ImportCommand extends RoverCommandParser implements RoverCommand {
     @Override
     public void execute() {
         while (!commands.isEmpty()) {
-            LoggingCommand logCom = new LoggingCommand(commands.poll());
+            LoggingCommand logCom = new LoggingCommand((RoverCommand) commands.poll());
             logCom.execute();
         }
 

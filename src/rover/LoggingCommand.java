@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author Alexander
  */
 public class LoggingCommand implements RoverCommand {
-    private static Logger log = Logger.getLogger(LoggingCommand.class.getName());
+    //private static Logger log = Logger.getLogger(LoggingCommand.class.getName());
     private RoverCommand command;
 
     public LoggingCommand(RoverCommand command) {
@@ -20,7 +20,7 @@ public class LoggingCommand implements RoverCommand {
     }
 
     public void log(){
-        log.info(command.getClass().getSimpleName()+" to be executed");
+        System.out.println(command.getClass().getSimpleName()+" to be executed");
     }
     
     @Override

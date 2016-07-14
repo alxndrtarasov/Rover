@@ -16,6 +16,11 @@ public class TurnCommand implements RoverCommand {
     private Turnable rover;
     private Direction direction;
 
+    public TurnCommand(Turnable rover, Direction direction) {
+        this.rover = rover;
+        this.direction = direction;
+    }
+
     public TurnCommand(Turnable rover, StringTokenizer token) {
         if (token.countTokens() != 2) {
             throw new AssertionError();

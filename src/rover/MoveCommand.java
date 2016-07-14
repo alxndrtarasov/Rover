@@ -17,6 +17,12 @@ public class MoveCommand implements RoverCommand {
     private int x;
     private int y;
 
+    public MoveCommand(Moveable rover, int x, int y) {
+        this.rover = rover;
+        this.x = x;
+        this.y = y;
+    }
+
     public MoveCommand(Moveable rover, StringTokenizer token) {
         this.rover = rover;
         if (token.countTokens() != 3) {

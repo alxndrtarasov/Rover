@@ -5,17 +5,24 @@
         <group>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/TurnCommand.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/Ground.java</file>
+            <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/ImportCommand.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/GroundVisorException.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/RoverCommandParser.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/RoverCommand.java</file>
+            <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/ImportTextCommand.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/GroundVisor.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/Rover.java</file>
+            <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/TextRoverCommandParser.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/Turnable.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/MoveCommand.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/Moveable.java</file>
+            <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/RecursiveRunException.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/GroundCell.java</file>
+            <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/XMLRoverCommandParser.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/Direction.java</file>
             <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/CellState.java</file>
+            <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/LoggingCommand.java</file>
+            <file>file:/C:/Users/Alexander/Documents/NetBeansProjects/Rover/src/rover/ImportXMLCommand.java</file>
         </group>
     </open-files>
 </project-private>

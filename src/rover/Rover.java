@@ -1,7 +1,5 @@
 package rover;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,21 +52,32 @@ public class Rover implements Moveable, Turnable {
     }
 
     public static void main(String[] args) {
+        Rover r = new Rover();
+        r.getVisor().setGround(new Ground(100, 100));
+        r.move(9, 9);
+        r.getVisor().hasObstacles(9, 9);
+        TextRoverCommandParser parser;
         try {
-            Rover r = new Rover();
-            r.getVisor().setGround(new Ground(100, 100));
-            r.move(9, 9);
-            r.getVisor().hasObstacles(9, 9);
-            RoverCommandParser parser = new RoverCommandParser(r, "commands.txt");
+            parser = new TextRoverCommandParser(r, "commands.txt");
             RoverCommand command = null;
             while ((command = parser.readNextCommand()) != null) {
                 LoggingCommand logCom = new LoggingCommand(command);
                 logCom.execute();
             }
-
-        } catch (ParseException ex) {
-            System.out.println("Unparsable file");
+        } catch (ParseException | RecursiveRunException ex) {
+            Logger.getLogger(Rover.class.getName()).log(Level.SEVERE, null, ex);
         }
+        XMLRoverCommandParser parserXML;
+        try {
+            parserXML = new XMLRoverCommandParser(r, "commands.xml");
+            RoverCommand commandXML = null;
+            while ((commandXML = parserXML.readNextCommand()) != null) {
+                LoggingCommand logCom = new LoggingCommand(commandXML);
+                logCom.execute();
+            }
+        } catch (ParseException | RecursiveRunException ex) {
+            Logger.getLogger(Rover.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
     public GroundVisor getVisor() {
